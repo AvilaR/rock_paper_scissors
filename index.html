@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+    </head>
+    <body>
+        <script>
+            let computerPlay = () => {
+                let rand = Math.floor(Math.random() * 2);
+                let result = '';
+                if(rand === 0) {
+                    result = 'Rock';
+                }
+                else if(rand === 1) {
+                    result = 'Paper';
+                }
+                else {
+                    result = 'Scissors';
+                }
+                return result;
+            }
+
+            let playRound = (playerSelection, computerSelection) => {
+                playerSelection = playerSelection.toLowerCase();
+                computerSelection = computerSelection.toLowerCase();
+                
+                let result = '';
+                
+                if(playerSelection === 'rock') {
+                    if(computerSelection === 'rock') {
+                        result = 'Tie!';
+                    }
+                    else if(computerSelection === 'paper') {
+                        result = 'You lose! Paper beats rock.';
+                    }
+                    else {
+                        result = 'You win! Rock beats scissors.';
+                    }
+                }
+                else if(playerSelection === 'paper') {
+                    if(computerSelection === 'rock') {
+                        result = 'You win! Paper beats rock.';
+                    }
+                    else if(computerSelection === 'paper') {
+                        result = 'Tie!';
+                    }
+                    else {
+                        result = 'You lose! Scissors beats paper.';
+                    }
+                }
+                else if(playerSelection === 'scissors') {
+                    if(computerSelection === 'rock') {
+                        result = 'You lose! Rock beats scissors.';
+                    }
+                    else if(computerSelection === 'paper') {
+                        result = 'You win! Scissors beats paper.';
+                    }
+                    else {
+                        result = 'Tie';
+                    }
+                }
+                return result;
+            }
+
+            let game = () => {
+                let playerScore = 0;
+                let computerScore = 0;
+
+                while(playerScore + computerScore < 5) {
+                    let playerSelection = prompt('What\'s your play?', 'Rock');
+                    let computerSelection = computerPlay();
+
+                    let roundResult = playRound(playerSelection, computerSelection);
+
+                    if(roundResult.includes('win')) {
+                        playerScore += 1;
+                    }
+                    else if(roundResult.includes('lose')) {
+                        computerScore += 1;
+                    }
+
+                    console.log(roundResult);
+                }
+
+                if(playerScore > computerScore) {
+                    console.log('You win the game!');
+                }
+                else {
+                    console.log('The computer wins the game!');
+                }
+            }
+
+            game();
+        </script>
+    </body>
+</html>
